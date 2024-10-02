@@ -45,26 +45,27 @@ public class InsertDetails extends HttpServlet {
 		try {
 			Class.forName(DbUtil.driver);
 		} catch (ClassNotFoundException e) {
-			System.out.println("Class not found " + e);
+			System.out.println("Driver de base de datos no encontrado " + e);
 		}
 		try {
 			Connection conn = DriverManager.getConnection(DbUtil.url, DbUtil.user, DbUtil.password);
-			System.out.println("connection successful");
+			System.out.println("----------- Connection successful ------------");
 
-			PreparedStatement st = conn.prepareStatement("insert into estudiante values(?, ?, ?, ?)");
+			PreparedStatement st = conn.prepareStatement("insert into estudiante values( ?, ?, ?)");
 
-			st.setInt(1, Integer.valueOf(request.getParameter("id")));
-			st.setString(2, request.getParameter("nombre"));
-			st.setString(3, request.getParameter("apellido"));
-			st.setString(4, request.getParameter("email"));
+
+			st.setString(1, request.getParameter("nombre"));
+			st.setString(2, request.getParameter("apellido"));
+			st.setString(3, request.getParameter("email"));
 
 			st.executeUpdate();
 
 			st.close();
 			conn.close();
 
-			response.sendRedirect("success.jsp?msg=insert");
+			response.sendRedirect("success.jsp?msg=Insert");
 		} catch (Exception e) {
+			System.out.println("xxxxxxxxxx Connection not successfull xxxxxxxxxx");
 			e.printStackTrace();
 		}
 	}

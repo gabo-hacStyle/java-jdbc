@@ -20,7 +20,7 @@
 		};
 		xhr.send("id=" + userId);
 	}
-
+	
 </script>
 <body>
 

@@ -43,7 +43,7 @@ public class SelectDetails extends HttpServlet {
 
 			Connection conn = DriverManager.getConnection(DbUtil.url, DbUtil.user, DbUtil.password);
 			System.out.println("connection successful");
-			PreparedStatement st = conn.prepareStatement("select * from estudiante where est_codigo=?");
+			PreparedStatement st = conn.prepareStatement("select * from estudiante where id=?");
 
 			st.setInt(1, Integer.valueOf(request.getParameter("id")));
 
@@ -51,12 +51,16 @@ public class SelectDetails extends HttpServlet {
 
 			while (rs.next()) {
 
-				id = rs.getInt(1);
-				nombre = rs.getString(2);
-				apellido = rs.getString(3);
-				email = rs.getString(4);
+
+				nombre = rs.getString(1);
+				apellido = rs.getString(2);
+				email = rs.getString(3);
+				id = rs.getInt(4);
 
 			}
+
+
+
 
 			rs.close();
 			st.close();
